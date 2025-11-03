@@ -22,7 +22,7 @@ public class ResultadoController {
         return resultadoService.findAll();
     }
 
-    // GET - Obtener un resultado por ID
+    // GET - Obtener un resultado por ID//
     @GetMapping("/{id}")
     public ResponseEntity<Resultado> getById(@PathVariable Long id) {
         return resultadoService.findById(id)

@@ -26,7 +26,6 @@ public class ResultadoService {
 
     // POST: Crear nuevo resultado
     public Resultado save(Resultado resultado) {
-        // Lógica: Se podría validar que el Laboratorio, Analisis y Técnico existan.
         return resultadoRepository.save(resultado);
     }
 
@@ -37,7 +36,6 @@ public class ResultadoService {
                 resultado.setResultadoDetalle(resultadoDetails.getResultadoDetalle());
                 resultado.setLaboratorio(resultadoDetails.getLaboratorio());
                 resultado.setAnalisis(resultadoDetails.getAnalisis());
-                // ... actualizar otros campos según sea necesario
                 return resultadoRepository.save(resultado);
             })
             .orElseThrow(() -> new RuntimeException("Resultado no encontrado con ID: " + id));

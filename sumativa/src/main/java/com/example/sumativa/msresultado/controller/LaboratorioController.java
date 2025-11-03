@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LaboratorioController extends JpaRepository<Resultado, Long> {
-    // Puedes añadir métodos de consulta específicos, ej: findByLaboratorioId()
+    
 }

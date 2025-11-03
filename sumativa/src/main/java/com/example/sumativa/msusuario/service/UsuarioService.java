@@ -26,8 +26,6 @@ public class UsuarioService {
 
     // POST: Crear nuevo
     public Usuario save(Usuario usuario) {
-        // Lógica de negocio: Aquí se debería cifrar la contraseña (ej. con BCrypt)
-        // Por simplicidad, solo guardamos.
         return usuarioRepository.save(usuario);
     }
 
@@ -39,7 +37,6 @@ public class UsuarioService {
                 usuario.setEmail(usuarioDetails.getEmail());
                 // Asumiendo que el ROL se maneja en el objeto Usuario
                 usuario.setRol(usuarioDetails.getRol());
-                // No se actualiza la contraseña directamente en un PUT simple
                 return usuarioRepository.save(usuario);
             })
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
