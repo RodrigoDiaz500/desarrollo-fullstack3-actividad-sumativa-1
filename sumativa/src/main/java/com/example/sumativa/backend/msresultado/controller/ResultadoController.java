@@ -1,7 +1,7 @@
-package com.example.sumativa.msresultado.controller;
+package com.example.sumativa.backend.msresultado.controller;
 
-import com.example.sumativa.model.Resultado;
-import com.example.sumativa.msresultado.service.ResultadoService;
+import com.example.sumativa.backend.model.Resultado;
+import com.example.sumativa.backend.msresultado.service.ResultadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +16,11 @@ public class ResultadoController {
     @Autowired
     private ResultadoService resultadoService;
 
-    // GET - Obtener todos los resultados
     @GetMapping
     public List<Resultado> getAll() {
         return resultadoService.findAll();
     }
 
-    // GET - Obtener un resultado por ID//
     @GetMapping("/{id}")
     public ResponseEntity<Resultado> getById(@PathVariable Long id) {
         return resultadoService.findById(id)
@@ -30,14 +28,20 @@ public class ResultadoController {
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // POST - Crear un nuevo resultado
     @PostMapping
     public ResponseEntity<Resultado> create(@RequestBody Resultado resultado) {
-        Resultado savedResultado = resultadoService.save(resultado);
-        return new ResponseEntity<>(savedResultado, HttpStatus.CREATED);
+        try {
+            Resultado savedResultado = resultadoService.save(resultado);
+            return new ResponseEntity<>(savedResultado, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            // Error de datos (ej: falta Analysis o Laboratorio)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+        } catch (RuntimeException e) {
+            // Error de FK (ej: Análisis o Laboratorio no existe)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+        }
     }
 
-    // PUT - Actualizar un resultado existente
     @PutMapping("/{id}")
     public ResponseEntity<Resultado> update(@PathVariable Long id, @RequestBody Resultado resultadoDetails) {
         try {
@@ -48,7 +52,6 @@ public class ResultadoController {
         }
     }
 
-    // DELETE - Eliminar un resultado por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         resultadoService.deleteById(id);

@@ -1,4 +1,4 @@
-package com.example.sumativa.model;
+package com.example.sumativa.backend.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

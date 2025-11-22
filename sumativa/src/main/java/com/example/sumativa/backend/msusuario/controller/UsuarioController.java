@@ -1,7 +1,8 @@
-package com.example.sumativa.msusuario.controller;
+package com.example.sumativa.backend.msusuario.controller;
 
-import com.example.sumativa.model.Usuario;
-import com.example.sumativa.msusuario.service.UsuarioService;
+import com.example.sumativa.backend.model.Usuario;
+import com.example.sumativa.backend.msusuario.service.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

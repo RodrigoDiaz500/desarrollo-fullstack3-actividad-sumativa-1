@@ -1,8 +1,9 @@
-package com.example.sumativa.msusuario.repository;
+package com.example.sumativa.backend.msusuario.repository;
 
-import com.example.sumativa.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.example.sumativa.backend.model.Usuario;
 
 import java.util.Optional;
 
